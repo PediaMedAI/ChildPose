@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="550" height="154" viewBox="0 0 550 154" fill="none">
+  <defs>
+    <linearGradient id="trail" x1="62" y1="74" x2="492" y2="74" gradientUnits="userSpaceOnUse"><stop stop-color="#9aa9e3"/><stop offset=".53" stop-color="#b09cc8"/><stop offset="1" stop-color="#ed8c50"/></linearGradient>
+    <pattern id="grid" width="13" height="13" patternUnits="userSpaceOnUse"><path d="M13 0H0v13" stroke="#dce4f9" stroke-width="1"/></pattern>
+  </defs>
+  <rect x="22" y="10" width="145" height="128" rx="14" fill="url(#grid)" stroke="#dbe3f5" stroke-dasharray="3 4"/>
+  <path d="M75 66c57-49 112 25 199-17 63-31 125 10 177-1" stroke="url(#trail)" stroke-width="1.7" stroke-dasharray="4 6" opacity=".7"/>
+  <g stroke="#899cda" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M84 38l4 9 19 7 17 19 13-8M88 47 74 60 61 73 68 88m6-28 13 30 22-2-2-34M87 90l-14 17-20 15m56-34 18 18-10 18"/>
+    <circle cx="82" cy="30" r="12"/>
+    <path d="M74 60l33-6m-20 36 20-36" stroke-dasharray="3 4" opacity=".53"/>
+    <path d="M52 122h11m54 2h10"/>
+    <g fill="white"><circle cx="74" cy="60" r="3"/><circle cx="107" cy="54" r="3"/><circle cx="61" cy="73" r="3"/><circle cx="124" cy="73" r="3"/><circle cx="68" cy="88" r="3"/><circle cx="137" cy="65" r="3"/><circle cx="87" cy="90" r="3"/><circle cx="109" cy="88" r="3"/><circle cx="73" cy="107" r="3"/><circle cx="127" cy="106" r="3"/></g>
+  </g>
+  <g stroke="#918ac4" stroke-width="2.45" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M266 39l-1 9-16 11-16 15 5 16m27-42 17 10 17 13 14-11m-64-1 9 31 21 1 3-33m-24 32-7 20-13 14m41-33 14 17-4 16"/>
+    <circle cx="266" cy="29" r="12"/>
+    <path d="M249 59l33-1m-24 32 24-32" stroke-dasharray="3 4" opacity=".55"/>
+    <path d="M238 124h10m41 0h11"/>
+    <g fill="white"><circle cx="249" cy="59" r="3"/><circle cx="282" cy="58" r="3"/><circle cx="233" cy="74" r="3"/><circle cx="299" cy="71" r="3"/><circle cx="238" cy="90" r="3"/><circle cx="313" cy="60" r="3"/><circle cx="258" cy="90" r="3"/><circle cx="279" cy="91" r="3"/><circle cx="251" cy="110" r="3"/><circle cx="293" cy="108" r="3"/></g>
+  </g>
+  <g stroke="#d46c2d" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M445 40l-2 10-15 11-12 15 5 17m22-43 18 11 17-12 15-3m-65 15 6 31 21-2 6-29m-27 31 2 18-8 15m27-35 20 15 4 20"/>
+    <circle cx="445" cy="30" r="12"/>
+    <path d="M428 61h33m-27 31 27-31" stroke-dasharray="3 4" opacity=".55"/>
+    <path d="M428 125h11m40 0h11"/>
+    <g fill="white"><circle cx="428" cy="61" r="3"/><circle cx="461" cy="61" r="3"/><circle cx="416" cy="76" r="3"/><circle cx="478" cy="49" r="3"/><circle cx="421" cy="93" r="3"/><circle cx="493" cy="46" r="3"/><circle cx="434" cy="92" r="3"/><circle cx="455" cy="90" r="3"/><circle cx="436" cy="110" r="3"/><circle cx="475" cy="105" r="3"/></g>
+  </g>
+  <g stroke="url(#trail)" stroke-width="1.3" stroke-linecap="round"><path d="M174 78h36m-6-5 6 5-6 5M344 78h38m-6-5 6 5-6 5"/></g>
+  <circle cx="493" cy="46" r="16" stroke="#ec925c" stroke-dasharray="2 4"/>
+  <path d="M31 138h482" stroke="#e0e1ea"/>
+</svg>

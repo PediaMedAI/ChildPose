@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="ChildPose adapts pretrained pose encoders into streaming, age-aware models for pediatric 2D pose estimation. NeurIPS 2026.">
+  <meta name="theme-color" content="#ffffff">
+  <title>ChildPose: Foundation for Children Pose Modeling</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="results.js"></script>
+  <script defer src="site.js"></script>
+  <script defer src="media.js"></script>
+</head>
+<body>
+  <svg class="icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-paper" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6m-6 4h6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-2-15-4 18"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 4 16 4 16 0V6M4 12v6c0 4 16 4 16 0v-6"/></symbol>
+    <symbol id="i-model" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zm0 10 9-5M3 7l9 5v10"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 5V4H4v12h1"/></symbol>
+    <symbol id="i-cite" viewBox="0 0 24 24"><path d="M5 5v14M10 8h9M10 12h9M10 16h5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M5 20v-7M12 20V5M19 20v-4"/></symbol>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+  <main id="main">
+    <header class="container hero" id="top">
+      <figure class="projlogo"><img src="assets/childpose-lockup.svg" width="550" height="154" alt="ChildPose illustration showing a sequence of three skeleton poses"></figure>
+      <h1><span class="wordmark">ChildPose</span><span class="subtitle">: Foundation for Children Pose Modeling</span></h1>
+      <p class="authors">
+        <span class="first">Jiakai Chen<sup>1,2,∗</sup></span>
+        <span class="first">Yifan Shen<sup>1,2,∗</sup></span>
+        <span class="first">Boyi Li<sup>1,2,∗</sup></span>
+        <span>Chuanmiao Dong<sup>2</sup></span>
+        <span>Xu Cao<sup>1,2,†</sup></span>
+      </p>
+      <p class="author-notes"><span class="first">∗ Equal contribution.</span> <span>† Corresponding author.</span></p>
+      <p class="affiliations"><span><sup>1</sup> PediaMed AI</span><span><sup>2</sup> University of Illinois Urbana-Champaign</span></p>
+      <p class="venue">NeurIPS 2026</p>
+      <div class="hero-links" aria-label="Project resources">
+        <a class="btn btn-solid" href="#paper-placeholder" data-resource="Paper"><svg aria-hidden="true"><use href="#i-paper"/></svg>Paper</a>
+        <a class="btn" href="#citation"><svg aria-hidden="true"><use href="#i-cite"/></svg>Citation</a>
+        <a class="btn" href="#experiments"><svg aria-hidden="true"><use href="#i-chart"/></svg>Experiments</a>
+        <a class="btn" href="#dataset-placeholder" data-resource="Dataset"><svg aria-hidden="true"><use href="#i-data"/></svg>Dataset</a>
+        <a class="btn" href="#code-placeholder" data-resource="Code"><svg aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+        <a class="btn" href="#model-placeholder" data-resource="Model"><svg aria-hidden="true"><use href="#i-model"/></svg>Model</a>
+      </div>
+      <p class="resource-note" id="resource-status" aria-live="polite"></p>
+      <p class="lede">Can a model turn <span class="kw-in">videos of children</span> into <span class="kw-out">stable 2D poses</span>, even when individual frames are blurred or occluded?</p>
+      <p class="hero-body">We introduce <strong>ChildPose</strong>, a modular video pose model for pediatric movement. It learns developmental cues through age-aware co-training and uses a short memory of past frames to estimate the current pose. We test it across four encoder families on children held out of training.</p>
+      <div class="hero-meta" aria-label="Project at a glance">
+        <span><b>5,943</b> video clips</span><span><b>25.6</b> hours of video</span>
+        <span><b class="kw-in">1,176,332</b> annotated windows</span><span><b class="kw-out">0.8956</b> benchmark AP</span>
+      </div>
+    </header>
+
+    <section class="container section" id="takeaways" aria-labelledby="takeaways-title">
+      <h2 class="part-head" id="takeaways-title">Key takeaways</h2>
+      <ol class="takeaways">
+        <li><span><strong>Children pose a distinct challenge.</strong> Body proportions change with development, and children crawl, roll and are held in ways that expose gaps in adult-centric pose models.</span></li>
+        <li><span><strong>Model failures guide annotation.</strong> A human-in-the-loop process prioritizes difficult poses, occlusions and motion patterns for manual review and correction.</span></li>
+        <li><span><strong>Memory and age supervision adapt pretrained encoders.</strong> ChildPose turns four backbone families into streaming pose models and improves on both off-the-shelf and fine-tuned baselines.</span></li>
+        <li><span><strong>Holding out child identities tests generalization.</strong> ChildPose improves pose accuracy on children absent from training, including on the public-only benchmark.</span></li>
+      </ol>
+    </section>
+
+    <section class="container section" id="dataset" aria-labelledby="dataset-title">
+      <h2 class="part-head" id="dataset-title">Dataset</h2>
+      <p class="sec-lede">The <strong>Children Pose Dataset</strong> combines six sources covering infant postures, social interaction, structured motion, everyday actions and clinical gait.</p>
+      <figure class="paper-figure"><a href="assets/dataset.webp" target="_blank" rel="noopener" aria-label="Open the full dataset overview figure"><img src="assets/dataset.webp" width="910" height="334" loading="lazy" alt="Paper figure showing the relative duration and sequence count of the six dataset sources, alongside representative frames."></a>
+          <figcaption><span>FIG. 02</span> Source composition by video duration and sequence count, with representative frames from the paper.</figcaption>
+        </figure>
+        <div class="source-grid">
+          <article><p class="tag">Public source</p><h3>ChildPlay</h3><p>Natural social interaction and gaze in videos with children, peers and caregivers.</p></article>
+          <article><p class="tag">Public source</p><h3>InfAct</h3><p>Infant sitting, crawling, rolling and spontaneous movement in home videos.</p></article>
+          <article><p class="tag">Public source</p><h3>Kinder-Gator</h3><p>Structured motion from children aged 5–9, with adult reference motion in the source.</p></article>
+          <article><p class="tag">Public source</p><h3>KS</h3><p>A child-centered Kinetics subset with varied actions, viewpoints and backgrounds.</p></article>
+          <article><p class="tag private">Private recordings</p><h3>InfantPose</h3><p>Supine infant movement from General Movements Assessment recordings.</p></article>
+          <article><p class="tag private">Private recordings</p><h3>Children Gait Video</h3><p>Multi-view pediatric walking with expert Edinburgh Visual Gait Score assessments.</p></article>
+        </div>
+        <div class="subsection">
+          <div class="subheading">
+            <h3>Model-assisted annotation</h3>
+            <p>Reviewers accept anatomically plausible, temporally stable predictions and send representative failure frames for manual keypoint, box and age annotation. Corrected cases then improve the next round’s annotator.</p>
+          </div>
+          <figure class="paper-figure">
+            <a href="assets/annotation.webp" target="_blank" rel="noopener" aria-label="Open the full annotation pipeline figure"><img src="assets/annotation.webp" width="910" height="404" loading="lazy" alt="Pipeline showing clip sampling, Sapiens pose prediction, manual quality review, human correction and model fine-tuning for the next round."></a>
+            <figcaption><span>FIG. 01</span> Human review prioritizes occlusion, motion blur, left–right swaps, missing joints and atypical poses for correction.</figcaption>
+          </figure>
+          <div class="facts-grid">
+            <article><h4>12 annotation rounds</h4><p>Starting from Sapiens-2B, each round sampled 200 clips at random. About 95% of sampled clips passed review in the final round.</p></article>
+            <article><h4>1,176,332 windows</h4><p>Eight frames at 5 FPS, with COCO-17 joints and SAM3 child boxes. Windows with mean keypoint confidence below 0.7 were filtered.</p></article>
+            <article><h4>8:1:1 split</h4><p>2,088 raw videos for training and 522 for validation and test combined. Children in either held-out partition are absent from training.</p></article>
+          </div>
+        </div>
+        <details class="fold"><summary>Age groups and label coverage</summary>
+          <div class="fold-body">
+            <p>Reliable age labels cover 487,397 of 976,551 training windows (49.91%) and 759 of 3,061 training clips (24.80%), including 30 mixed-age clips. Windows without reliable age labels still supervise pose.</p>
+            <ul class="age-bars" aria-label="Age distribution among labeled training windows">
+              <li><span>Infant <small>&lt;1</small></span><meter min="0" max="100" value="18.5">18.5%</meter><b>18.5%</b></li>
+              <li><span>Toddler <small>1–2</small></span><meter min="0" max="100" value="5.3">5.3%</meter><b>5.3%</b></li>
+              <li><span>Pre-school <small>3–5</small></span><meter min="0" max="100" value="12.4">12.4%</meter><b>12.4%</b></li>
+              <li><span>Child <small>6–9</small></span><meter min="0" max="100" value="55.2">55.2%</meter><b>55.2%</b></li>
+              <li><span>Teenager <small>10–17</small></span><meter min="0" max="100" value="0.1">0.1%</meter><b>0.1%</b></li>
+              <li><span>Adult <small>≥18</small></span><meter min="0" max="100" value="8.6">8.6%</meter><b>8.6%</b></li>
+            </ul>
+            <p class="small">Percentages describe the age-labeled subset. The corpus includes additional training windows without age metadata.</p>
+          </div>
+        </details>
+      <details class="fold"><summary>Source provenance and dataset comparison</summary>
+          <div class="fold-body">
+            <p>ChildPlay uses CC BY-NC 4.0 and InfAct has a non-commercial research license. Kinder-Gator is publicly released by its originating lab. KS annotations cover a subset of Kinetics-600, with the original video and platform terms applying. InfantPose and raw CGV recordings are private. The underlying CGV resource is listed under CC BY-NC 4.0 in the paper.</p>
+            <p>InfantPose includes 20,748 clinician-annotated images with 21 refined keypoints and 15 million unlabeled frames from 5,187 videos. CGV contributes multi-view walking and EVGS annotations from a resource of 339,236 frames and 110 subjects aged 3–17. Children Pose uses a shared COCO-17 schema across sources.</p>
+            <p>Children Pose combines real RGB video, temporally ordered labels and broader age and capture coverage. The comparison below includes BabyPose, In-Motion Poses, MINI-RGBD, SyRIP and Multiview Child Motor Development.</p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable dataset comparison" data-table="datasets"></div>
+          </div>
+        </details>
+      <details class="fold"><summary>Privacy, consent and data release</summary><div class="fold-body">
+        <p>The originating studies report IRB approval 202106202 and parent or guardian consent. Private recordings were de-identified before access and remain on controlled servers. Release plans cover appearance-free annotations for eligible subsets under CC BY-NC 4.0 with a data use agreement. Checkpoints follow the strictest upstream backbone terms.</p>
+        <p>Public sources were used under their original terms. For web-derived sources, the planned release includes annotations and video identifiers. Body shape and gait carry residual re-identification risk even after face blurring. The responsible-use policy prohibits re-identification, identity linkage and covert monitoring.</p>
+      </div></details>
+    </section>
+
+    <section class="container section" id="method" aria-labelledby="method-title">
+      <h2 class="part-head" id="method-title">Method</h2>
+      <p class="sec-lede">ChildPose estimates <strong>17 keypoints per frame</strong> using a modular image encoder, a causal memory bank and an age-aware training objective.</p>
+      <figure class="paper-figure">
+        <a href="assets/architecture.webp" target="_blank" rel="noopener" aria-label="Open the full ChildPose architecture figure"><img src="assets/architecture.webp" width="910" height="319" loading="lazy" alt="ChildPose architecture showing the modular image encoder, memory attention, a six-entry FIFO memory bank, pose heatmaps and an auxiliary age prediction head."></a>
+        <figcaption><span>FIG. 03</span> The pose head decodes each frame as it arrives, and the memory encoder writes its conditioned representation back to the bank.</figcaption>
+      </figure>
+      <div class="method-grid">
+        <article><span class="step">01</span><h3>Encode each crop</h3><p>HRNet, HRFormer, ViTPose and Sapiens expose dense spatial features through a common token interface. The ChildPose pose head upsamples them into 17 heatmaps and decodes each joint from the heatmap peak.</p></article>
+        <article><span class="step">02</span><h3>Retrieve recent evidence</h3><p>Current-frame self-attention is followed by cross-attention to the six most recent encoded states with learned relative time embeddings. A FIFO queue bounds the amount of context.</p></article>
+        <article><span class="step">03</span><h3>Learn developmental cues</h3><p>A temporal transformer pools frame features and predicts an age group through a classification token. This auxiliary branch uses reliable age labels during training and is omitted during pose inference.</p></article>
+      </div>
+      <details class="fold"><summary>Training losses and curriculum</summary>
+        <div class="fold-body">
+          <p><strong>Pose.</strong> Weighted mean squared error supervises Gaussian joint heatmaps, masking missing joints and downweighting uncertain ones.</p>
+          <p><strong>Temporal.</strong> Soft-argmax coordinates yield consecutive-frame distances normalized by the mean square-root box area. The model minimizes average jitter, confidence-weighted jitter, and the absolute change in confidence between adjacent frames.</p>
+          <p><strong>Age.</strong> Cross-entropy supervises the six age groups on windows with reliable labels. The respective weights for pose, jitter, confidence-weighted jitter, soft flicker and age are 1, 0.2, 0.2, 0.2 and 1.</p>
+          <ol class="curriculum"><li>Warm up the pose head, then train the head and backbone.</li><li>Warm up memory with pose supervision, then enable temporal losses.</li><li>Train the age head, then co-train all branches.</li></ol>
+        </div>
+      </details>
+      <details class="fold"><summary>Model configurations and optimization <span>Tables 5–6</span></summary>
+          <div class="fold-body">
+            <p>Training uses four NVIDIA L40S GPUs. Crops expand child boxes by 1.1×, use bicubic resizing and apply ImageNet normalization. Confidence thresholds of 0.35 and 0.7 separate missing, uncertain and confident labels. AdamW uses a cosine schedule, a default learning rate of 10<sup>−4</sup>, a backbone rate of 10<sup>−5</sup> and weight decay of 0.01. Checkpoints are selected by validation pose or age accuracy, according to the phase.</p>
+            <p>Memory uses 512-dimensional encoded features and one attention block. The pose head uses two transposed-convolution upsampling layers. The age branch uses prefix-token attention when available and mean pooling otherwise. Training soft-argmax uses temperature 0.3.</p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable encoder configuration table" data-table="configs"></div>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable training curriculum table" data-table="curriculum"></div>
+          </div>
+        </details>
+    </section>
+
+    <section class="container section" id="experiments" aria-labelledby="experiments-title">
+      <h2 class="part-head" id="experiments-title">Experiments</h2>
+      <p class="sec-lede">We evaluate 2D pose accuracy and video stability on children absent from training. Models receive the same child bounding boxes within each benchmark.</p>
+      <details class="fold"><summary>How the scores are computed</summary>
+        <div class="fold-body">
+          <p>The official COCO API computes Object Keypoint Similarity (OKS) using visible labeled keypoints, per-joint tolerances and ground-truth person scale. AP and AR average across OKS thresholds 0.50–0.95 in increments of 0.05. AP<sub>50</sub> and AP<sub>75</sub> use single OKS thresholds. Predictions map from crop coordinates to the original image before scoring.</p>
+          <p>Jitter averages scale-normalized joint displacement over annotated adjacent frame pairs. CWJ weights each pair by the product of its confidence scores. Both measures can rise during valid rapid motion. Flicker measures the share of pairs where a joint crosses the 0.3 confidence threshold between frames.</p>
+        </div>
+      </details>
+      <noscript><p class="experiment-intro">Enable JavaScript to display the experiment tables.</p></noscript>
+
+      <article class="experiment" aria-labelledby="exp-main">
+        <p class="experiment-label">01 · Paper Table 1</p>
+        <h3 id="exp-main">Fine-tuned models on the full benchmark</h3>
+        <p class="experiment-intro">We compare ChildPose with standard image-based fine-tuning across four encoder families on the full subject-held-out test set. ChildPose improves AP over encoder-matched fine-tuning in all four families. The ViTPose-B variant reaches <strong>0.8956 AP</strong>, <strong>0.9409 AP<sub>75</sub></strong> and <strong>0.0000 flicker</strong>.</p>
+        <label class="table-filter">Backbone family <select data-family-for="main"><option value="all">All families</option><option>HRNet</option><option>HRFormer</option><option>ViTPose</option><option>Sapiens</option></select></label>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-main" data-benchmark="main"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-zero">
+        <p class="experiment-label">02 · Paper Table 8</p>
+        <h3 id="exp-zero">Zero-shot transfer</h3>
+        <p class="experiment-intro">We run publicly released pose checkpoints on the same held-out children before any fine-tuning on Children Pose. These results show how well pretrained estimators transfer directly to pediatric video and provide a reference for the fine-tuned benchmark.</p>
+        <label class="table-filter">Backbone family <select data-family-for="zero"><option value="all">All families</option><option>HRNet</option><option>HRFormer</option><option>ViTPose</option><option>Sapiens</option></select></label>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-zero" data-benchmark="zero"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-baselines">
+        <p class="experiment-label">03 · Paper Table 3</p>
+        <h3 id="exp-baselines">MotionBERT and SHaRPose baselines</h3>
+        <p class="experiment-intro">We compare ChildPose with MotionBERT, which refines sequences of detected 2D joints, and SHaRPose, which estimates poses frame by frame. Jointly fine-tuned MotionBERT reaches 0.8343 AP with ViTPose-B. The strongest SHaRPose configuration reaches 0.8872 AP, while ChildPose reaches 0.8956 AP with 0.0000 flicker.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-baselines" data-benchmark="extra"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-public">
+        <p class="experiment-label">04 · Paper Table 9</p>
+        <h3 id="exp-public">Reproducibility with public data</h3>
+        <p class="experiment-intro">We train and evaluate ChildPose and its ViTPose-B baselines on a subject-held-out split built solely from four public sources. Relative to fine-tuned ViTPose-B, ChildPose raises AP from 0.8673 to 0.8761 and AP<sub>75</sub> from 0.9197 to 0.9338.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-public" data-benchmark="public"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-ablation">
+        <p class="experiment-label">05 · Paper Table 2</p>
+        <h3 id="exp-ablation">Component ablation</h3>
+        <p class="experiment-intro">We add temporal memory, temporal losses and age co-training in stages across six encoder variants. Memory raises AP in all six. The other components have smaller, backbone-dependent effects, with age supervision improving AP in five variants and reducing it for Sapiens-0.3B.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-ablation" data-table="ablation"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-memory">
+        <p class="experiment-label">06 · Paper Table 10</p>
+        <h3 id="exp-memory">Memory capacity</h3>
+        <p class="experiment-intro">We vary memory capacity by truncating a trained six-slot checkpoint at inference and by retraining models from scratch. Retraining without memory yields 0.8625 AP, while truncating to zero slots after training yields 0.8918 AP. Gains level off at short context lengths.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-memory" data-table="memory"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-decoding">
+        <p class="experiment-label">07 · Paper Table 11</p>
+        <h3 id="exp-decoding">Heatmap decoding and post-processing</h3>
+        <p class="experiment-intro">We keep the ChildPose checkpoint fixed and compare plain argmax, quarter-pixel and DARK refinements, and flip testing. The reported benchmark uses single-pass argmax and linear crop-to-image mapping. Combining flip testing with DARK raises AP from 0.8956 to 0.9032.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-decoding" data-table="decoding"></div>
+      </article>
+
+      <article class="experiment" aria-labelledby="exp-speed">
+        <p class="experiment-label">08 · Paper Table 7</p>
+        <h3 id="exp-speed">Inference speed and overhead</h3>
+        <p class="experiment-intro">We time ChildPose–ViTPose-B and standard fine-tuned ViTPose-B on one L40S at FP16 and batch size 1. The test uses 2,048 preprocessed frames from 16 videos and resets memory for each video. After the first six frames, ChildPose adds 1.145 ms per frame and reaches 163.74 FPS, with 18.178M additional inference parameters.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="exp-speed" data-table="speed"></div>
+      </article>
+      <details class="fold"><summary>Scope, applications and limitations</summary><div class="fold-body">
+        <p>The experiments cover top-down 2D pose with provided boxes. Stability diagnostics alone cannot establish motion faithfulness, and the full dataset cannot be released. Deployment requires setting-specific validation, privacy safeguards and human oversight, including fairness evaluation for unannotated factors such as skin tone, body habitus and clinical condition.</p>
+        <p>ChildPose may support research in pediatric movement, assistive video understanding and child-centered interaction. The responsible-use policy prohibits using the model for standalone clinical decisions.</p>
+      </div></details>
+      <section class="experiment" id="visualization" aria-labelledby="visualization-title">
+        <p class="experiment-label">09 · Paper Figure 4</p>
+        <h3 id="visualization-title">Visualization</h3>
+        <p class="experiment-intro">We compare pose overlays from zero-shot inference, single-frame fine-tuning and ChildPose. Each panel shows the same frame and encoder family so you can compare joint placement across the three settings.</p>
+        <div class="comparison" id="pose-comparison" hidden>
+          <div class="comparison-controls">
+            <div class="setting-tabs" id="example-picker" role="group" aria-label="Example frame"></div>
+            <label>Backbone <select id="visual-backbone"><option>HRNet</option><option>HRFormer</option><option selected>ViTPose</option><option>Sapiens</option></select></label>
+          </div>
+          <p id="comparison-status" class="sr-only" aria-live="polite"></p>
+          <div class="comparison-grid" id="comparison-grid"></div>
+        </div>
+        <details class="fold" id="full-comparison" open><summary>Full qualitative comparison <span>Figure 4</span></summary>
+          <div class="fold-body">
+            <figure class="paper-figure qualitative">
+              <a href="assets/qualitative.webp" target="_blank" rel="noopener" aria-label="Open the qualitative comparison at full size"><img src="assets/qualitative.webp" width="904" height="1144" loading="lazy" alt="Side-by-side pose overlays for zero-shot, fine-tuned and ChildPose variants across seven examples in the paper."></a>
+              <figcaption><span>FIG. 04</span> Each prediction group shows HRNet, HRFormer, ViTPose and Sapiens. Select the figure to view it at full size.</figcaption>
+            </figure>
+          </div>
+        </details>
+      </section>
+    </section>
+
+    <section class="container section" id="citation" aria-labelledby="citation-title">
+      <h2 class="part-head" id="citation-title">Citation</h2>
+      <div class="citation-box">
+        <div class="code-head"><span>bibtex</span><button id="copy-citation" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+        <pre id="bibtex"><code>@inproceedings{chen2026childpose,
+  title     = {{ChildPose}: Foundation for Children Pose Modeling},
+  author    = {Chen, Jiakai and Shen, Yifan and Li, Boyi
+               and Dong, Chuanmiao and Cao, Xu},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}</code></pre>
+        <span id="copy-status" class="sr-only" aria-live="polite"></span>
+      </div>
+    </section>
+  </main>
+  <footer class="container footer">
+    <div>© 2026 The ChildPose authors · <a href="mailto:xucao@pediamed.ai">Contact</a></div>
+    <p>Computational support from PediaMed AI and NemX Labs’ innovation fund.</p>
+  </footer>
+  <nav class="pnav" aria-label="Sections">
+    <span class="pnav-track" aria-hidden="true"><i></i></span>
+    <a href="#top" aria-current="location"><b></b><span>Overview</span></a>
+    <a href="#takeaways"><b></b><span>Key takeaways</span></a>
+    <a href="#dataset"><b></b><span>Dataset</span></a>
+    <a href="#method"><b></b><span>Method</span></a>
+    <a href="#experiments"><b></b><span>Experiments</span></a>
+    <a href="#visualization"><b></b><span>Visualization</span></a>
+    <a href="#citation"><b></b><span>Citation</span></a>
+  </nav>
+</body>
+</html>
