@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="https://pediamed.ai/ChildPose/">🌐 Project Page</a> •
-  <a href="https://huggingface.co/Asp1rinn/ChildPose">🤗 Model</a> •
-  <a href="#usage">💻 Inference Code</a>
+  <a href="https://huggingface.co/PediaMedAI/ChildPose">🤗 Model</a> •
+  <a href="https://github.com/PediaMedAI/ChildPose">💻 Code Repository</a>
 </p>
 
 ### Authors
@@ -39,7 +39,7 @@ estimators.
 ## About this repository
 
 This repository contains the **inference code** of ChildPose; the model weights are hosted on the
-Hugging Face Hub at [Asp1rinn/ChildPose](https://huggingface.co/Asp1rinn/ChildPose). Training code and
+Hugging Face Hub at [PediaMedAI/ChildPose](https://huggingface.co/PediaMedAI/ChildPose). Training code and
 data are not part of this release.
 
 ChildPose estimates COCO-17 2D keypoints of a child in video. It is a top-down model: each frame is cropped
